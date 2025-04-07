@@ -11,10 +11,5 @@ namespace EntityLayer.Concrete
 		public int Id { get; set; }
 		public string Name { get; set; }
 		public string City { get; set; }
-
-		public void SaveChanges()
-		{
-			throw new NotImplementedException();
-		}
 	}
 }

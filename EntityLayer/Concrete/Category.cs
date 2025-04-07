@@ -10,11 +10,7 @@ namespace EntityLayer.Concrete
 	{
 		public int CategoryId { get; set; }
 		public string CategoryName { get; set; }
-		public object Categories { get; set; }
+		//public object Categories { get; set; }
 
-		public void SaveChanges()
-		{
-			throw new NotImplementedException();
-		}
 	}
 }
