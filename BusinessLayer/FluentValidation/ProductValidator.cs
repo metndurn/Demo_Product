@@ -11,7 +11,10 @@ namespace BusinessLayer.FluentValidation
 	/*fluentvalidation kullanımı asagıdadır */
 	public class ProductValidator : AbstractValidator<Product>
 	{
-		public ProductValidator()//generic constructor metodu
+		/*burada bu rol uzerıne kosullar eklendı bunun sebebı ilgili kontrollerda birden 
+		 fazla if else yada birden fazla kosullu kod yazmaktan cok daha iyi oldugu ıcın 
+		bunlar yazıldı*/
+		public ProductValidator()//generic constructor metodu yani yapıcı metod demektır
 		{
 			RuleFor(x => x.Name).NotEmpty().WithMessage("Ürün adı boş geçilemez.");
 			RuleFor(x => x.Name).MinimumLength(3).WithMessage("Ürün adı en az 3 karakter olmalıdır.");

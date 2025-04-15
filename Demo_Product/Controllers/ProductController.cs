@@ -1,6 +1,8 @@
 ﻿using BusinessLayer.Concrete;
+using BusinessLayer.FluentValidation;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System.Reflection.Metadata;
@@ -25,9 +27,36 @@ namespace Demo_Product.Controllers
 			return View();
 		}
 		[HttpPost]
-		public IActionResult AddProduct(Product p)//ürün ekleme işlemi
+		public IActionResult AddProduct(Product p)//site uzerınden ürün ekleme işlemi
 		{
-			productManager.TInsert(p);//productManager sınıfından TInsert metodunu çağırıyoruz ve p parametresini gönderiyoruz.
+			ProductValidator validationRules = new ProductValidator();
+			ValidationResult result = validationRules.Validate(p);//p parametresini ProductValidator sınıfındaki Validate metoduna gönderiyoruz.
+			if (result.IsValid)//kosul koyduk 
+			{
+				productManager.TInsert(p);//productManager sınıfından TInsert metodunu çağırıyoruz ve p parametresini gönderiyoruz.
+				return RedirectToAction("Index");
+			}
+			else
+			{
+				foreach (var item in result.Errors)//eger olmazsa hata
+				{
+					//ModelState'e hata mesajlarını ekliyoruz.
+					//item.PropertyName, hata mesajının hangi property'e ait olduğunu belirtir.
+					//item.ErrorMessage, hata mesajını içerir.
+					//ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+					//ModelState'e hata mesajlarını ekliyoruz.
+					//item.PropertyName, hata mesajının hangi property'e ait olduğunu belirtir.
+					//item.ErrorMessage, hata mesajını içerir.
+				
+					ModelState.AddModelError(item.PropertyName, item.ErrorMessage);//ModelState'e hata mesajlarını ekliyoruz.
+				}
+			}
+			return View();
+		}
+		public IActionResult DeleteProduct(int id)//ürün silme işlemi
+		{
+			var value = productManager.TGetById(id);//productManager sınıfından TGetById metodunu çağırıyoruz ve id parametresini gönderiyoruz.
+			productManager.TDelete(value);//productManager sınıfından TDelete metodunu çağırıyoruz ve productValue parametresini gönderiyoruz.
 			return RedirectToAction("Index");
 		}
 	}

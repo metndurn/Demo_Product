@@ -7,12 +7,15 @@
 <form method="post">
     @Html.Label("Urun Adi")
     @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Name)
     <br />
     @Html.Label("Urun Fiyati")
     @Html.TextBoxFor(x => x.Price, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Price)
     <br />
     @Html.Label("Urun Stok Sayisi")
     @Html.TextBoxFor(x => x.Stock, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.Stock)
     <br />
     <button class="btn btn-primary">Urun Ekle</button>
 </form>
