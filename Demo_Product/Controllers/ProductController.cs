@@ -47,7 +47,7 @@ namespace Demo_Product.Controllers
 					//ModelState'e hata mesajlarını ekliyoruz.
 					//item.PropertyName, hata mesajının hangi property'e ait olduğunu belirtir.
 					//item.ErrorMessage, hata mesajını içerir.
-				
+
 					ModelState.AddModelError(item.PropertyName, item.ErrorMessage);//ModelState'e hata mesajlarını ekliyoruz.
 				}
 			}
@@ -57,6 +57,19 @@ namespace Demo_Product.Controllers
 		{
 			var value = productManager.TGetById(id);//productManager sınıfından TGetById metodunu çağırıyoruz ve id parametresini gönderiyoruz.
 			productManager.TDelete(value);//productManager sınıfından TDelete metodunu çağırıyoruz ve productValue parametresini gönderiyoruz.
+			return RedirectToAction("Index");
+		}
+		[HttpGet]
+		public IActionResult UpdateProduct(int id)//ürün güncelleme işlemi
+		{
+			var value = productManager.TGetById(id);//productManager sınıfından TGetById metodunu çağırıyoruz ve id parametresini gönderiyoruz.
+			return View(value);//value değişkenini View'a gönderiyoruz.
+		}
+		[HttpPost]
+		public IActionResult UpdateProduct(Product p)
+		{
+			//var value = productManager.TGetById(p.Id);//productManager sınıfından TGetById metodunu çağırıyoruz ve p.Id parametresini gönderiyoruz.
+			productManager.TUpdate(p);//productManager sınıfından TUpdate metodunu çağırıyoruz ve p parametresini gönderiyoruz.
 			return RedirectToAction("Index");
 		}
 	}

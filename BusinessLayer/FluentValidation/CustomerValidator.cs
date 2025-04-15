@@ -13,7 +13,9 @@ namespace BusinessLayer.FluentValidation
 		public CustomerValidator()//generic constructor metodu
 		{
 			RuleFor(x => x.Name).NotEmpty().WithMessage("İsim boş geçilemez.");
+			RuleFor(x => x.Name).MinimumLength(3).WithMessage("Musteri adı en az 3 karakter olmalıdır.");
 			RuleFor(x => x.City).NotEmpty().WithMessage("Şehir boş geçilemez.");
+			RuleFor(x => x.City).MinimumLength(3).WithMessage("Sehir adı en az 3 karakter olmalıdır.");
 		}
 	}
 }

@@ -1,0 +1,21 @@
+﻿@model EntityLayer.Concrete.Product//onyuzde urun guncelleme sayfasidir
+@{
+    ViewData["Title"] = "UpdateProduct";
+    Layout = "~/Views/Shared/_UILayout.cshtml";
+}
+
+<form method="post">
+    @Html.Label("Urun ID")
+    @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+    <br />
+    @Html.Label("Urun Adi")
+    @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+    <br />
+    @Html.Label("Urun Fiyati")
+    @Html.TextBoxFor(x => x.Price, new { @class = "form-control" })
+    <br />
+    @Html.Label("Urun Stok Sayisi")
+    @Html.TextBoxFor(x => x.Stock, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-info">Urun Guncelle</button>
+</form>
