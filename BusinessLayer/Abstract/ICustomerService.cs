@@ -13,5 +13,7 @@ namespace BusinessLayer.Abstract
 		// Örneğin, müşteri bilgilerini güncelleme, müşteri arama vb.
 		// Ancak şu an için sadece GenericService'den miras alıyoruz.
 		// Bu kısım ileride genişletilebilir.
+		List<Customer> GetCustomersListWithJob();
+
 	}
 }

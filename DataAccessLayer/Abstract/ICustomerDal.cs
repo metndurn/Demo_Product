@@ -10,6 +10,6 @@ namespace DataAccessLayer.Abstract
 	//IGenericDal'daki T parametresini Customer class'ı ile doldurduk
 	public interface ICustomerDal : IGenericDal<Customer>
 	{
-		
+		List<Customer> GetCustomerListWithJob();//job tablosu ile customer tablosunu birleştirip listeleme bunun dıger adı join
 	}
 }

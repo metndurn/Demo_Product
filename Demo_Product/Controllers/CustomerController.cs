@@ -5,6 +5,7 @@ using EntityLayer.Concrete;
 using FluentValidation;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Demo_Product.Controllers
 {
@@ -13,12 +14,22 @@ namespace Demo_Product.Controllers
 		CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
 		public IActionResult Index()//customer listeleme 
 		{
-			var values = customerManager.TGetList();
+			var values = customerManager.GetCustomersListWithJob();
 			return View(values);
 		}
 		[HttpGet]
 		public IActionResult AddCustomer()//customer ekleme
 		{
+			/*customer alanına aıt tek seferlık kod yazılıp buradaki verileri liste halinde
+			 dropdownlist olarak secılebılır sekle soktuk*/
+			JobManager jobManager = new JobManager(new EfJobDal());
+			List<SelectListItem> values = (from x in jobManager.TGetList()//customerManager sınıfından TGetList metodunu çağırıyoruz ve listeleme yapıyoruz.
+				select new SelectListItem()
+				{
+				Text = x.Name,
+				Value = x.JobId.ToString(),
+				}).ToList();
+			ViewBag.c = values;//ViewBag ile listeyi view'e gönderiyoruz.
 			return View();
 		}
 		[HttpPost]

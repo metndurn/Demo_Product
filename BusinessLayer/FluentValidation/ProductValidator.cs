@@ -22,10 +22,5 @@ namespace BusinessLayer.FluentValidation
 			RuleFor(x => x.Price).NotEmpty().WithMessage("Ürün fiyatı boş geçilemez.");
 			RuleFor(x => x.Stock).NotEmpty().WithMessage("Stok miktarı boş geçilemez.");
 		}
-
-		public ValidationResult Validate(Customer c)
-		{
-			throw new NotImplementedException();
-		}
 	}
 }

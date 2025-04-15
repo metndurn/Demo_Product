@@ -19,6 +19,11 @@ namespace BusinessLayer.Concrete
 			_customerDal = customerDal;
 		}
 
+		public List<Customer> GetCustomersListWithJob()//ozellıklı customer tablosu ile job tablosunu birleştirip listeleme
+		{
+			return _customerDal.GetCustomerListWithJob();
+		}
+
 		public void TDelete(Customer t)
 		{
 			_customerDal.Delete(t);
