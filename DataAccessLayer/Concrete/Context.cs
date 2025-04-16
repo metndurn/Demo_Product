@@ -1,4 +1,5 @@
 ﻿using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,9 @@ using System.Threading.Tasks;
 namespace DataAccessLayer.Concrete
 {
 	//veritabanı olusturulurken hangi katmanda yazdıysan o katmanda islem yapmalısın
-	public class Context: DbContext//veritabanı baglantı yerlerı
+	//aslında ısın ozu identitydbcontext sınıfı zaten dbcontext sınıfından mıras alıyor
+	//ilk başta dbcontext kullanıldı daha sonra identitydbcontext kullanıldı
+	public class Context: IdentityDbContext //dbcontext ile veritabanı baglantı yerlerı
 	{
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
