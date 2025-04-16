@@ -12,6 +12,7 @@ namespace Demo_Product.Controllers
 	public class CustomerController : Controller
 	{
 		CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+		JobManager jobManager = new JobManager(new EfJobDal());
 		public IActionResult Index()//customer listeleme 
 		{
 			var values = customerManager.GetCustomersListWithJob();
@@ -21,8 +22,8 @@ namespace Demo_Product.Controllers
 		public IActionResult AddCustomer()//customer ekleme
 		{
 			/*customer alanına aıt tek seferlık kod yazılıp buradaki verileri liste halinde
-			 dropdownlist olarak secılebılır sekle soktuk*/
-			JobManager jobManager = new JobManager(new EfJobDal());
+			 dropdownlist olarak secılebılır sekle soktuk kodu daha sonra kaldırıp en yukarıya verdık unutma*/
+			
 			List<SelectListItem> values = (from x in jobManager.TGetList()//customerManager sınıfından TGetList metodunu çağırıyoruz ve listeleme yapıyoruz.
 				select new SelectListItem()
 				{
@@ -60,6 +61,13 @@ namespace Demo_Product.Controllers
 		[HttpGet]
 		public IActionResult UpdateCustomer(int id)//customer güncelleme
 		{
+			List<SelectListItem> values = (from x in jobManager.TGetList()//customerManager sınıfından TGetList metodunu çağırıyoruz ve listeleme yapıyoruz.
+										   select new SelectListItem()
+										   {
+											   Text = x.Name,
+											   Value = x.JobId.ToString(),
+										   }).ToList();
+			ViewBag.c = values;//ViewBag ile listeyi view'e gönderiyoruz.
 			var value = customerManager.TGetById(id);
 			return View(value);
 		}

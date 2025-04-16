@@ -14,5 +14,8 @@
     @Html.Label("Musteri Sehri")
     @Html.TextBoxFor(x => x.City, new { @class = "form-control" })
     <br />
+    @Html.Label("Meslek Seciniz")
+    @Html.DropDownListFor(x => x.JobId, (List<SelectListItem>)ViewBag.c, new { @class = "form-control" })
+    <br />
     <button class="btn btn-info">Musteri Guncelle</button>
 </form>

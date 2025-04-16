@@ -1,0 +1,12 @@
+﻿* arama islemleri
+* uyelik islemleri
+* identity
+* yardim popup
+* footer -- yapıyoruz ve bıttı
+* ayarlar -- yapıyoruz
+* cikis yap
+* giris yap
+* yeni uye kaydi
+* admin --> asp.net user
+* publish
+* projenin son halini canliya tasima
