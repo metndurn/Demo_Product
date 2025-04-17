@@ -12,7 +12,7 @@ namespace DataAccessLayer.Concrete
 	//veritabanı olusturulurken hangi katmanda yazdıysan o katmanda islem yapmalısın
 	//aslında ısın ozu identitydbcontext sınıfı zaten dbcontext sınıfından mıras alıyor
 	//ilk başta dbcontext kullanıldı daha sonra identitydbcontext kullanıldı
-	public class Context: IdentityDbContext //dbcontext ile veritabanı baglantı yerlerı
+	public class Context: IdentityDbContext<AppUser,AppRole,int>//dbcontext ile veritabanı baglantı yerlerı appuser ve approle sınıflarıyla baglanır
 	{
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
