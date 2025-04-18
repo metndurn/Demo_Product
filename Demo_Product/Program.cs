@@ -1,6 +1,8 @@
 using DataAccessLayer.Concrete;
 using Demo_Product.Models;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,15 @@ builder.Services.AddIdentity<AppUser, AppRole>
     ().AddEntityFrameworkStores<Context>
     ().AddErrorDescriber<CustomIdentityValidator>();//daha sonra bu eklendý hata kodlarýný versýn dýye
 builder.Services.AddControllersWithViews();//controller ve view eklenmesi için gerekli olan kodlar
+/*bu kýsýmda authorize iþlemi yapýldý yani kullanýcý giriþ yapmadan bu sayfaya eriþemez */
+builder.Services.AddControllersWithViews(config =>
+{
+    var policy = new AuthorizationPolicyBuilder()
+		.RequireAuthenticatedUser()
+		.Build();
+        config.Filters.Add(new AuthorizeFilter(policy));
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -25,11 +36,10 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseAuthentication();
 
 app.UseRouting();
-
 app.UseAuthorization();
-
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
